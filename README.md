@@ -1,0 +1,1 @@
+# nonebot_plugin_group_enter_validation
