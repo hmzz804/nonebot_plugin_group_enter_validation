@@ -1,22 +1,23 @@
-import random
 import json
 import os
-
-from nonebot.adapters.onebot.v11 import Event, PrivateMessageEvent
-from nonebot.plugin import on_request,on_shell_command
-from nonebot.log import logger
-from nonebot.adapters import Bot
-from nonebot.permission import SUPERUSER
-from nonebot.params import ShellCommandArgs
-from nonebot import Config, get_driver
-from nonebot.rule import ArgumentParser
+import random
 from argparse import Namespace
+
+from nonebot import Config, get_driver
+from nonebot.adapters import Bot
+from nonebot.adapters.onebot.v11 import Event, PrivateMessageEvent
+from nonebot.log import logger
+from nonebot.params import ShellCommandArgs
+from nonebot.permission import SUPERUSER
+from nonebot.plugin import on_request, on_shell_command
+from nonebot.rule import ArgumentParser
 
 KEY_PATH = r"data/group_entry_key.json"
 
 env_config = Config(**get_driver().config.dict())
+
 try:
-    key_length = env_config.group_login_key_length
+    key_length = env_config.group_login_key_lenght
 except:
     logger.warning("配置项中未找到自定义的密钥长度，将采用默认值10")
     key_length = 10
@@ -87,7 +88,6 @@ async def group_handle(
         logger.warning(f"收到加群（{event_json['group']}）请求，但未找到此群的密钥存储，已忽略本次请求")
         group_login.finish()
 
-
 get_key_args_parser = ArgumentParser()
 get_key_args_parser.add_argument('-n', '--num', type=int, default=1)
 get_key_args_parser.add_argument('-g', '--group', type=int, default=None)
@@ -105,6 +105,8 @@ async def get_key_handle(
 ):
     if not args.group:
         await get_key.finish(message="群号呢")
+    if not (args.num <= 30 and args.num >= 1):
+        await get_key.finish(message="获取密钥个数最小为1个，最大为30个")
     groups_info = read(path=KEY_PATH)
     group_id, key_num, keys_list = str(args.group), int(args.num), create_key(length=key_length, num=args.num)
     if group_id not in (groups_info.keys()):
@@ -118,7 +120,7 @@ async def get_key_handle(
             "user": ""
         }
         groups_info[group_id].append(key_dict)
-    send_key = '\n'.join(keys_list)
+    send_key = f'\n'.join(keys_list)
     write_in(path=KEY_PATH, new_content=groups_info)
     await get_key.finish(
         message=f"创建密钥成功！\n"
