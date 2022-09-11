@@ -26,9 +26,7 @@ if not os.path.exists("data"):
     os.mkdir("data")
 if not os.path.exists(KEY_PATH):
     with open(KEY_PATH, "w") as g:
-        initialize_dict = {
-            "groups":{}
-        }
+        initialize_dict = {}
         json.dump(initialize_dict, g, indent=4)
 
 def read(path:str):
