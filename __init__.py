@@ -17,7 +17,7 @@ KEY_PATH = r"data/group_entry_key.json"
 env_config = Config(**get_driver().config.dict())
 
 try:
-    key_length = env_config.group_login_key_lenght
+    key_length = env_config.group_login_key_length
 except:
     logger.warning("配置项中未找到自定义的密钥长度，将采用默认值10")
     key_length = 10
