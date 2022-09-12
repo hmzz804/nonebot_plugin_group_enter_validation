@@ -1,11 +1,11 @@
 # nonebot_plugin_group_enter_validation
 
 ## 使用：  
-超管获取加群密钥，分发给用户，用户输入密钥加群，bot判断密钥进行审核，__每个密钥仅可使用一次__ ,该密钥的使用者QQ将被记录在`data/group_entry_key.json`的user中  
+超管获取加群密钥，分发给用户，用户输入密钥加群，bot判断密钥进行审核，__每个密钥仅可使用一次__ ,该密钥的使用者QQ将被记录在 `data/group_entry_key.json` 的user中  
 
 ## env配置：  
  在.env文件中添加  
-> `GROUP_LOGIN_KEY_LENGTH=10`  #自定义每个密钥的字符个数  
+> `GROUP_LOGIN_KEY_LENGTH=10  #自定义每个密钥的字符个数`  
 
 ##  __超管__ 获取加群密钥指令：
 以下命令需要加 __命令前缀__（默认为 / ），可自行设置为空    
