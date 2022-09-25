@@ -13,7 +13,6 @@ from nonebot.plugin import on_request, on_shell_command
 from nonebot.rule import ArgumentParser
 
 KEY_PATH = r"data/group_entry_key.json"
-
 env_config = Config(**get_driver().config.dict())
 
 try:
