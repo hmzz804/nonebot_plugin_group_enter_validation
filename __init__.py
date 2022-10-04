@@ -100,10 +100,8 @@ async def get_key_handle(
     event: PrivateMessageEvent,
     args: Namespace = ShellCommandArgs()
 ):
-    if not args.group:
-        await get_key.finish(message="群号呢")
-    if not (args.num <= 30 and args.num >= 1):
-        await get_key.finish(message="获取密钥个数最小为1个，最大为30个")
+    if not args.group: await get_key.finish(message="群号呢")
+    if not (args.num <= 30 and args.num >= 1): await get_key.finish(message="获取密钥个数最小为1个，最大为30个")
     groups_info = read(path=KEY_PATH)
     group_id, key_num, keys_list = str(args.group), int(args.num), create_key(length=key_length, num=args.num)
     if group_id not in (groups_info.keys()):
